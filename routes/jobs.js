@@ -1,18 +1,16 @@
 "use strict";
 
 const express = require("express"),
-  router = express.Router(),
-  fetch = require("node-fetch");
+  got = require("got"),
+  router = express.Router();
 
-router.get("/:progLang", async (req, res) => {
-  console.log("i am here");
-  const { progLang } = req.params;
-  console.log("PROGLANG", progLang);
-  const url = `https://jobs.github.com/positions.json?description=${progLang}`;
-  const jobsData = await fetch(url).then((response) => response.json());
+router.get("/", async (req, res) => {
+  const { url } = req.query;
+  //   request(url).pipe(res);
+  const jobsData = await got(url);
   console.log("JOBSDATA: ", jobsData);
   if (jobsData) {
-    res.json(jobsData).status(200);
+    res.send(jobsData.body);
   } else {
     res.sendStatus(500);
   }
