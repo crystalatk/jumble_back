@@ -5,10 +5,10 @@ const express = require("express"),
   router = express.Router();
 
 router.get("/", async (req, res) => {
-  const { url } = req.query;
+  const { progLang, zip } = req.query;
+  const url = `https://jobs.github.com/positions.json?description=${progLang}&location=${zip}`;
   //   request(url).pipe(res);
   const jobsData = await got(url);
-  console.log("JOBSDATA: ", jobsData);
   if (jobsData) {
     res.send(jobsData.body);
   } else {
