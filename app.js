@@ -20,7 +20,9 @@ SERVER.listen(PORT, HOSTNAME, () => {
 });
 
 const rootController = require("./routes/index"),
-  jobsController = require("./routes/jobs");
+  jobsController = require("./routes/jobs"),
+  usersController = require("./routes/users");
 
 app.use("/", rootController);
 app.use("/jobs", jobsController);
+app.use("/users", usersController);
