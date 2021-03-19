@@ -48,10 +48,44 @@ class User {
     }
   }
 
-  static async addEntry(user_id, job_id, table) {
-    const query = `INSERT INTO ${table} (user_id, job_id) VALUES ('${user_id}', '${job_id}');`;
+  static async addEntry(
+    user_id,
+    job_id,
+    title,
+    location,
+    company,
+    company_url,
+    created_at,
+    description,
+    how_to_apply,
+    table
+  ) {
     try {
-      const response = await db.result(query);
+      const response = await db.result(
+        `INSERT INTO ${table} (user_id, job_id,title, location, company, company_url, created_at, description, how_to_apply) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
+        [
+          user_id,
+          job_id,
+          title,
+          location,
+          company,
+          company_url,
+          created_at,
+          description,
+          how_to_apply,
+        ]
+      );
+      return response;
+    } catch (err) {
+      console.log(err.message);
+      return err.message;
+    }
+  }
+
+  static async getData(user_id, table) {
+    const query = `SELECT job_id FROM ${table} WHERE user_id = ${user_id};`;
+    try {
+      const response = await db.any(query);
       return response;
     } catch (err) {
       return err.message;

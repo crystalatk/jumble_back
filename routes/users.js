@@ -11,6 +11,18 @@ router.get("/", async (req, res) => {
   res.sendStatus(200);
 });
 
+router.get("/userList", async (req, res) => {
+  const { user_id, table } = req.query;
+  console.log("THIS IS THE TABLE: ", table);
+  const listData = await UserModel.getData(user_id, table);
+  console.log(listData);
+  if (listData) {
+    res.send(listData);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
 // POSTS
 
 router.post("/login", async (req, res) => {
@@ -54,8 +66,30 @@ router.post("/signup", async (req, res) => {
 });
 
 router.post("/add", async (req, res) => {
-  const { user_id, job_id, table } = req.body;
-  const response = await UserModel.addEntry(user_id, job_id, table);
+  const {
+    user_id,
+    job_id,
+    title,
+    location,
+    company,
+    company_url,
+    created_at,
+    description,
+    how_to_apply,
+    table,
+  } = req.body;
+  const response = await UserModel.addEntry(
+    user_id,
+    job_id,
+    title,
+    location,
+    company,
+    company_url,
+    created_at,
+    description,
+    how_to_apply,
+    table
+  );
   response ? res.sendStatus(200) : res.sendStatus(500);
 });
 
