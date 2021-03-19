@@ -76,6 +76,7 @@ router.post("/add", async (req, res) => {
     created_at,
     description,
     how_to_apply,
+    company_logo,
     table,
   } = req.body;
   const response = await UserModel.addEntry(
@@ -88,9 +89,10 @@ router.post("/add", async (req, res) => {
     created_at,
     description,
     how_to_apply,
+    company_logo,
     table
   );
-  response ? res.sendStatus(200) : res.sendStatus(500);
+  response ? res.send(response) : res.sendStatus(500);
 });
 
 module.exports = router;

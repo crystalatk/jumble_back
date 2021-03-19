@@ -58,11 +58,12 @@ class User {
     created_at,
     description,
     how_to_apply,
+    company_logo,
     table
   ) {
     try {
       const response = await db.result(
-        `INSERT INTO ${table} (user_id, job_id,title, location, company, company_url, created_at, description, how_to_apply) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);`,
+        `INSERT INTO ${table} (user_id, job_id,title, location, company, company_url, created_at, description, how_to_apply, company_logo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
         [
           user_id,
           job_id,
@@ -73,6 +74,7 @@ class User {
           created_at,
           description,
           how_to_apply,
+          company_logo,
         ]
       );
       return response;
@@ -83,7 +85,7 @@ class User {
   }
 
   static async getData(user_id, table) {
-    const query = `SELECT job_id FROM ${table} WHERE user_id = ${user_id};`;
+    const query = `SELECT * FROM ${table} WHERE user_id = ${user_id};`;
     try {
       const response = await db.any(query);
       return response;
@@ -91,6 +93,8 @@ class User {
       return err.message;
     }
   }
+
+  //   static async deleteEntry()
 }
 
 module.exports = User;
