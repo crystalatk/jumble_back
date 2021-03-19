@@ -94,7 +94,17 @@ class User {
     }
   }
 
-  //   static async deleteEntry()
+  static async deleteEntry(user_id, job_id, table) {
+    try {
+      const response = await db.result(
+        `DELETE FROM ${table} WHERE user_id = $1 AND job_id = $2`,
+        [user_id, job_id]
+      );
+      return response;
+    } catch (err) {
+      return err.message;
+    }
+  }
 }
 
 module.exports = User;

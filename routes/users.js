@@ -1,5 +1,7 @@
 "use strict";
 
+const { response } = require("express");
+
 const express = require("express"),
   router = express.Router(),
   bcrypt = require("bcryptjs"),
@@ -93,6 +95,12 @@ router.post("/add", async (req, res) => {
     table
   );
   response ? res.send(response) : res.sendStatus(500);
+});
+
+router.post("/delete", async (req, res) => {
+  const { user_id, job_id, table } = req.body;
+  const deleteEntry = await UserModel.deleteEntry(user_id, job_id, table);
+  response ? res.sendStatus(200) : res.sendStatus(500);
 });
 
 module.exports = router;
