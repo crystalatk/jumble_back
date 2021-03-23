@@ -9,7 +9,7 @@ const express = require("express"),
 
 const cors = require("cors");
 const corsOptions = {
-  origin: "*",
+  origin: "https://laughing-panini-fb9bf4.netlify.app/",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
