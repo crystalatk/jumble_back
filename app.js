@@ -9,7 +9,10 @@ const express = require("express"),
 
 const cors = require("cors");
 const corsOptions = {
-  origin: "https://laughing-panini-fb9bf4.netlify.app/",
+  origin: [
+    "https://laughing-panini-fb9bf4.netlify.app/",
+    "http://localhost:3000",
+  ],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
   optionsSuccessStatus: 204,
