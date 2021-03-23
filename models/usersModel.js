@@ -63,7 +63,7 @@ class User {
   ) {
     try {
       const response = await db.result(
-        `INSERT INTO ${table} (user_id, job_id,title, location, company, company_url, created_at, description, how_to_apply, company_logo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
+        `INSERT INTO ${table} (user_id, job_id, title, location, company, company_url, created_at, description, how_to_apply, company_logo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`,
         [
           user_id,
           job_id,
@@ -85,7 +85,7 @@ class User {
   }
 
   static async getData(user_id, table) {
-    const query = `SELECT * FROM ${table} WHERE user_id = ${user_id};`;
+    const query = `SELECT * FROM ${table} WHERE user_id = ${user_id} ORDER BY date DESC;`;
     try {
       const response = await db.any(query);
       return response;
