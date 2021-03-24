@@ -15,7 +15,7 @@ class User {
       const response = await db.any(
         `SELECT username FROM users WHERE username='${username}';`
       );
-      return true;
+      return response;
     } catch (err) {
       return false;
     }
