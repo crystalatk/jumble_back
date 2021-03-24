@@ -105,6 +105,16 @@ class User {
     }
   }
 
+  static async getUserData(user_id, table) {
+    const query = `SELECT * FROM ${table} WHERE id = ${user_id}`;
+    try {
+      const response = await db.one(query);
+      return response;
+    } catch (err) {
+      return err.message;
+    }
+  }
+
   static async deleteEntry(user_id, job_id, table) {
     try {
       const response = await db.result(
