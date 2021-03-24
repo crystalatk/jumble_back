@@ -13,6 +13,12 @@ router.get("/", async (req, res) => {
   res.sendStatus(200);
 });
 
+router.get("/username", async (req, res) => {
+  const { username } = req.query;
+  const isUsername = await UserModel.checkUserNames(username);
+  res.send(isUsername);
+});
+
 router.get("/userList", async (req, res) => {
   const { user_id, table } = req.query;
   console.log("THIS IS THE TABLE: ", table);
