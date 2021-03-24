@@ -18,7 +18,11 @@ router.get("/username", async (req, res) => {
   console.log(username);
   const isUsername = await UserModel.checkUserNames(username);
   console.log("ISUSERNAME", isUsername);
-  res.send(isUsername);
+  if (isUsername.length) {
+    res.send(false);
+  } else {
+    res.send(true);
+  }
 });
 
 router.get("/userList", async (req, res) => {
