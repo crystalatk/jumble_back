@@ -31,6 +31,18 @@ router.get("/userList", async (req, res) => {
   }
 });
 
+router.get("/userInfo", async (req, res) => {
+  const { user_id, table } = req.query;
+  console.log("THIS IS THE TABLE: ", table);
+  const userData = await UserModel.getUserData(user_id, table);
+  console.log(userData);
+  if (userData) {
+    res.send(userData);
+  } else {
+    res.sendStatus(500);
+  }
+});
+
 // POSTS
 
 router.post("/login", async (req, res) => {
