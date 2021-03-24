@@ -15,7 +15,9 @@ router.get("/", async (req, res) => {
 
 router.get("/username", async (req, res) => {
   const { username } = req.query;
+  console.log(username);
   const isUsername = await UserModel.checkUserNames(username);
+  console.log(isUsername);
   res.send(isUsername);
 });
 
