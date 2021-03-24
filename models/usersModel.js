@@ -10,6 +10,17 @@ class User {
     this.password = password;
   }
 
+  static async checkUserNames(username) {
+    try {
+      const response = await db.one(
+        `SELECT username FROM users WHERE username=${username};`
+      );
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
   static async addUser(
     username,
     password,
