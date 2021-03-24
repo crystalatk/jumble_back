@@ -13,7 +13,7 @@ class User {
   static async checkUserNames(username) {
     try {
       const response = await db.any(
-        `SELECT username FROM users WHERE username=${username};`
+        `SELECT username FROM users WHERE username='${username}';`
       );
       return true;
     } catch (err) {
